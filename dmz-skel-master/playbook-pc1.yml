@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: network config
+      notify: restart network
+      copy:
+        dest: /etc/network/interfaces
+        content: |
+          auto lo
+          iface lo inet loopback
+
+          auto eth0
+          iface eth0 inet dhcp
+                post-up ip route del default dev eth0 || true
+
+          auto eth1
+          iface eth1 inet dhcp
+
+  handlers:
+    - name: restart network
+      service: name=networking state=restarted
