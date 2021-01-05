@@ -12,6 +12,7 @@
         packages:
         - iptables
         - iptables-persistent
+        - dnsmasq
 
     - sysctl:
         name: net.ipv4.ip_forward
@@ -25,7 +26,24 @@
       copy:
         dest: /etc/iptables/rules.v4
         src: iptables-rules
+        
+    - name: dnsmasq config
+      notify: dsnmasq handler
+      copy:
+        dest: /etc/dnsmasq.conf
+        src: dnsmasq.conf
+
+    - name: hosts config
+      notify: dsnmasq handler
+      copy:
+        dest: /etc/hosts
+        src: hosts
 
   handlers:
     - name: reload iptables
       command: "iptables-restore /etc/iptables/rules.v4"
+      
+    - name: dsnmasq handler
+      command: "systemctl restart dnsmasq.service"
+      
+    

@@ -2,6 +2,12 @@
 - hosts: all
   become: true
   tasks:
+    - name: install depends
+      apt:
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - curl
     - name: network config
       notify: restart network
       copy:

@@ -11,6 +11,7 @@
       vars:
         packages:
         - nginx-light
+        - curl
 
     - name: network config
       notify: restart network
@@ -29,7 +30,20 @@
                 address 10.0.0.2
                 netmask 255.255.255.0
                 gateway 10.0.0.1
+                
+    - name: config nginx
+      notify: nginx handler
+      copy:
+        dest: /etc/nginx/nginx.conf
+        src: nginx-config
 
+    - name: config dns
+      copy:
+        dest: /etc/resolv.conf
+        src: resolv.conf
+        
   handlers:
     - name: restart network
       service: name=networking state=restarted
+    - name: nginx handler
+      command: "systemctl restart nginx"
