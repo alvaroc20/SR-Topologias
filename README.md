@@ -1,7 +1,7 @@
 # SR-Topologias  
 ## Miembros del grupo  
-Álvaro Cerdá Pulla  
-Juan Manuel Palacios Navas  
+- Álvaro Cerdá Pulla  
+- Juan Manuel Palacios Navas  
 
 ## Proceso de arranque y prueba  
 Para arrancar los dispositivos, debemos hacer levaltar las máquinas y posteriormente acceder a la máquina que queramos (web-server, pc1, router) mediante ssh, lo podemos hacer de la siguiente manera:
