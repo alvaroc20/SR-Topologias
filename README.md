@@ -44,3 +44,4 @@ Tenemos varios ficheros nuevos:
 - squid.conf: Configuración del proxy con las IPs permitidas y puertos seguros.  
 
 ## Enlace al vídeo explicativo  
+https://web.microsoftstream.com/video/f30e5b73-3743-49d9-bc69-3292470c74cc  
