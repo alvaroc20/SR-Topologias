@@ -13,6 +13,7 @@
         - iptables
         - iptables-persistent
         - dnsmasq
+        - squid
 
     - sysctl:
         name: net.ipv4.ip_forward
@@ -38,12 +39,24 @@
       copy:
         dest: /etc/hosts
         src: hosts
+   
+    - name: squid config
+      notify: restart squid
+      copy:
+        dest: /etc/squid
+        src: squid.conf
 
+    - name: proxy
+      shell: export http_proxy="http://192.168.1.150:3128/"
+      
+      
   handlers:
     - name: reload iptables
       command: "iptables-restore /etc/iptables/rules.v4"
       
     - name: dsnmasq handler
       command: "systemctl restart dnsmasq.service"
-      
     
+    - name: restart squid
+      command: "systemctl restart squid"
+
